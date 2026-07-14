@@ -78,6 +78,7 @@ export default function Skills() {
                     (2022-2025)
                   </span>
                 </li>
+                <br />
                 <li>
                   Diploma (Electrical &amp; Electronics)
                   <p>Percentage - 75%</p>
