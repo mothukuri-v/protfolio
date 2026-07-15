@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const LANGUAGES = [
   { name: "Java", level: 90 },
@@ -33,6 +34,15 @@ function SkillBar({ name, level }) {
 }
 
 export default function Skills() {
+  const navigate = useNavigate();
+
+  const goToProjects = (e) => {
+    e.preventDefault();
+    navigate("/projects");
+    const el = document.getElementById("projects");
+    if (el) window.scrollTo({ top: el.offsetTop, behavior: "smooth" });
+  };
+
   return (
     <section className="skills" id="skills">
       <div className="max-width">
@@ -78,7 +88,6 @@ export default function Skills() {
                     (2022-2025)
                   </span>
                 </li>
-                <br />
                 <li>
                   Diploma (Electrical &amp; Electronics)
                   <p>Percentage - 75%</p>
@@ -88,7 +97,7 @@ export default function Skills() {
                 </li>
               </ul>
             </div>
-            <a href="#projects">Read more</a>
+            <a href="/projects" onClick={goToProjects}>Read more</a>
           </div>
 
           <div className="column right">

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import useTypewriter from "../hooks/useTypewriter";
 
 export default function Home() {
@@ -6,6 +7,14 @@ export default function Home() {
     typeSpeed: 100,
     backSpeed: 60,
   });
+  const navigate = useNavigate();
+
+  const goToContact = (e) => {
+    e.preventDefault();
+    navigate("/contact");
+    const el = document.getElementById("contact");
+    if (el) window.scrollTo({ top: el.offsetTop, behavior: "smooth" });
+  };
 
   return (
     <section className="home" id="home">
@@ -20,7 +29,7 @@ export default function Home() {
           <div className="text-3">
             And I'm a <span className="typing-1">{role}</span>
           </div>
-          <a href="#contact">Hire me</a>
+          <a href="/contact" onClick={goToContact}>Hire me</a>
         </div>
       </div>
     </section>
