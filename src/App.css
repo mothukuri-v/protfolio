@@ -522,6 +522,20 @@ section .title::after {
   width: 35px;
   border-radius: 14px;
 }
+.carousel-track-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel .card {
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
 
 /* ---------- Contact ---------- */
 .contact {
