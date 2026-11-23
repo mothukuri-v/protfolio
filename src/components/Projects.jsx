@@ -11,9 +11,19 @@ const PROJECTS = [
     ],
     link: "https://github.com/Venkat063/Car-Rental-App",
   },
+    {
+    img: "/images/pg.png",
+    title: "PG Rent Management",
+    tech: "Docker, CI/CD, React, MySQL, AWS",
+    points: [
+      "Deployed the application on AWS using Docker and Amazon RDS for database management.",
+      "Implemented JWT authentication, bcrypt security, role-based access (RBAC), and responsive UI.",
+    ],
+    link: "https://pg.mothukuri-venkat.online/",
+  },
   {
     img: "/images/ecom.png",
-    title: "E-Commerce Web Application (Flipkart Clone Lite)",
+    title: "E-Commerce Web Application",
     tech: "Java, Spring Boot, React, MySQL, AWS",
     points: [
       "Full-stack platform with product catalog, cart & order management.",
