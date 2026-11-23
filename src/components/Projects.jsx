@@ -41,27 +41,9 @@ const PROJECTS = [
     ],
     link: "https://venkat063.github.io/portfilio/",
   },
-  {
-    img: "/images/image-.png",
-    title: "Online Banking System",
-    tech: "Java, Spring Boot, React, PostgreSQL",
-    points: [
-      "Features: account creation, fund transfers, transaction history.",
-      "Secured with Spring Security + JWT & role-based access control.",
-    ],
-    link: "https://github.com/Venkat063/banking-system",
-  },
-  {
-    img: "/images/image-.png",
-    title: "Learning Management System (LMS)",
-    tech: "Java, Spring Boot, React, MySQL",
-    points: [
-      "Student enrollment, dashboards, and authentication.",
-      "Integrated course APIs with React, supporting file upload/download.",
-    ],
-    link: "https://github.com/Venkat063/ims-platform",
-  },
 ];
+
+
 
 function useItemsPerView() {
   const getItems = () => {
@@ -69,11 +51,14 @@ function useItemsPerView() {
     if (window.innerWidth >= 600) return 2;
     return 1;
   };
+
   const [items, setItems] = useState(getItems);
 
   useEffect(() => {
     const onResize = () => setItems(getItems());
+
     window.addEventListener("resize", onResize);
+
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
@@ -82,21 +67,29 @@ function useItemsPerView() {
 
 export default function Projects() {
   const itemsPerView = useItemsPerView();
+
   const maxIndex = Math.max(0, PROJECTS.length - itemsPerView);
   const [index, setIndex] = useState(0);
 
+  // Reset index if screen size changes
   useEffect(() => {
-    if (index > maxIndex) setIndex(maxIndex);
-  }, [maxIndex, index]);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 2500);
-    return () => clearInterval(id);
+    setIndex((prev) => Math.min(prev, maxIndex));
   }, [maxIndex]);
 
-  const goTo = (i) => setIndex(Math.min(Math.max(i, 0), maxIndex));
+  // Navigate to a specific slide
+  const goTo = (i) => {
+    setIndex(Math.min(Math.max(i, 0), maxIndex));
+  };
+
+  // Next button
+  const nextSlide = () => {
+    setIndex((prev) => Math.min(prev + 1, maxIndex));
+  };
+
+  // Previous button
+  const prevSlide = () => {
+    setIndex((prev) => Math.max(prev - 1, 0));
+  };
 
   return (
     <section className="projects" id="projects">
@@ -104,36 +97,72 @@ export default function Projects() {
         <h2 className="title">My Projects</h2>
 
         <div className="carousel">
-          <div
-            className="carousel-track"
-            style={{
-              transform: `translateX(-${(index * 100) / itemsPerView}%)`,
-            }}
+
+          {/* Previous Button */}
+          <button
+            className="carousel-btn prev-btn"
+            onClick={prevSlide}
+            disabled={index === 0}
+            aria-label="Previous projects"
           >
-            {PROJECTS.map((p) => (
-              <div
-                className="card"
-                key={p.title}
-                style={{ width: `calc(${100 / itemsPerView}% - 20px)` }}
-              >
-                <div className="box">
-                  <img src={p.img} alt={p.title} />
-                  <div className="text">{p.title}</div>
-                  <ul>
-                    <li>○ Technologies: {p.tech}</li>
-                    {p.points.map((pt) => (
-                      <li key={pt}>○ {pt}</li>
-                    ))}
-                  </ul>
-                  <a href={p.link} target="_blank" rel="noopener noreferrer">
-                    <i className="fas fa-link"></i>
-                  </a>
+            &#10094;
+          </button>
+
+          {/* Carousel */}
+          <div className="carousel-track-wrapper">
+            <div
+              className="carousel-track"
+              style={{
+                transform: `translateX(-${(index * 100) / itemsPerView}%)`,
+              }}
+            >
+              {PROJECTS.map((p) => (
+                <div
+                  className="card"
+                  key={p.title}
+                  style={{
+                    width: `${100 / itemsPerView}%`,
+                    flex: `0 0 ${100 / itemsPerView}%`,
+                  }}
+                >
+                  <div className="box">
+                    <img src={p.img} alt={p.title} />
+
+                    <div className="text">{p.title}</div>
+
+                    <ul>
+                      <li>○ Technologies: {p.tech}</li>
+
+                      {p.points.map((pt) => (
+                        <li key={pt}>○ {pt}</li>
+                      ))}
+                    </ul>
+
+                    <a
+                      href={p.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fas fa-link"></i>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+
+          {/* Next Button */}
+          <button
+            className="carousel-btn next-btn"
+            onClick={nextSlide}
+            disabled={index === maxIndex}
+            aria-label="Next projects"
+          >
+            &#10095;
+          </button>
         </div>
 
+        {/* Navigation Dots */}
         <div className="owl-dots">
           {Array.from({ length: maxIndex + 1 }).map((_, i) => (
             <button
@@ -141,9 +170,10 @@ export default function Projects() {
               className={`owl-dot${i === index ? " active" : ""}`}
               onClick={() => goTo(i)}
               aria-label={`Go to slide ${i + 1}`}
-            ></button>
+            />
           ))}
         </div>
+
       </div>
     </section>
   );
