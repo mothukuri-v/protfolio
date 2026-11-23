@@ -527,11 +527,11 @@ section .title::after {
   position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 75%;
 }
 
 .carousel-track-wrapper {
-  width: 100%;
+  width: 75%;
   overflow: hidden;
 }
 
@@ -549,7 +549,7 @@ section .title::after {
   width: 45px;
   height: 45px;
   border: none;
-  border-radius: 50%;
+  border-radius: 25%;
 
   background: crimson;
   color: white;
@@ -562,11 +562,11 @@ section .title::after {
 }
 
 .carousel-btn:hover:not(:disabled) {
-  background: #222;
+  background: #214a29;
 }
 
 .carousel-btn:disabled {
-  opacity: 0.3;
+  opacity: 0.1;
   cursor: not-allowed;
 }
 
