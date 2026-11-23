@@ -572,19 +572,19 @@ section .title::after {
 
 /* LEFT SIDE */
 .prev-btn {
-  left: 10px;
+  left: 5px;
 }
 
 /* RIGHT SIDE */
 .next-btn {
-  right: 10px;
+  right: 5px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .carousel-btn {
-    width: 35px;
-    height: 35px;
-    font-size: 18px;
+    width: 25px;
+    height: 25px;
+    font-size: 7px;
   }
 
   .prev-btn {
